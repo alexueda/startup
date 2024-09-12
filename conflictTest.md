@@ -1,1 +1,1 @@
-"Welcome to cs260"
+"My wife is nice and kind"
