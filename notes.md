@@ -4,3 +4,6 @@ There is setup, commit, pushup and pull.
 
 #markdown
 https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+
+#example to connect server from terminal
+➜  ssh -i ~/keys/production.pem ubuntu@53.104.2.123
