@@ -6,7 +6,7 @@
 What do you use to communicate essential information within your family? Perhaps you use messaging apps or sticky notes. The app I'm developing will help make this process more reliable and easier for everyone. With this app, everyone who shares an ID and password can access the list and update it with the necessary tasks. Completed tasks will be marked as green, while incomplete tasks will appear in red, allowing you to see what needs attention at a glance. This app will help eliminate forgotten communications or tasks within your group.
 
 ## Design
-#my image come hre
+(./pics/CS260-2.jpg)
 
 ## Key Features
 - Secure login with shared ID and password
@@ -28,4 +28,4 @@ I am going to use the required technologies in the following ways:
   - Retrieving and updating task lists
   - Task status management (complete/incomplete)
 - **Database/Login**: Stores user information, shared tasks, and task statuses. Provides secure storage of credentials and task data. Only authenticated users can access and update the list.
-- **WebSocket/Real-time Updates**: Synchronizes task updates in real-time across all users, ensuring that changes made by one user are immediately visible to others.
+- **WebSocket**: Synchronizes task updates in real-time across all users, ensuring that changes made by one user are immediately visible to others.
