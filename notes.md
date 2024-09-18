@@ -7,3 +7,7 @@ https://docs.github.com/en/get-started/writing-on-github/getting-started-with-wr
 
 #example to connect server from terminal
 ➜  ssh -i ~/keys/production.pem ubuntu@53.104.2.123
+
+#http to https
+This link show us how to swap http to https using Caddy
+https://learn.cs260.click/page/webServers/https/https_md
