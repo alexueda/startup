@@ -14,3 +14,6 @@ https://learn.cs260.click/page/webServers/https/https_md
 
 #Really useful site to learn basic code grammar
 [https://www.w3schools.com/html/html_images.asp](https://www.w3schools.com/html/default.asp)
+
+#This is good site for the HTML Input element
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
