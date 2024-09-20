@@ -18,5 +18,5 @@ https://learn.cs260.click/page/webServers/https/https_md
 #This is good site for the HTML Input element
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
 
-#HTML media
+#HTML media\n
 If we want to get the address for image or video, if it is in the chrome you can right-click and choose "copy image|video address"
