@@ -11,3 +11,6 @@ https://docs.github.com/en/get-started/writing-on-github/getting-started-with-wr
 #http to https
 This link show us how to swap http to https using Caddy
 https://learn.cs260.click/page/webServers/https/https_md
+
+#Really useful site to learn basic code grammar
+https://www.w3schools.com/html/html_images.asp
