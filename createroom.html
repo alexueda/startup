@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Create Room</title>
+        <link rel="icon" href="favicon.ico" />
+    </head>
+    <body>
+        <header>
+            <h1>Sharenote</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="createroom.html">Create Room</a></li>
+                    <li><a href="sharenote.html">sharenote_main_app</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+                <h2>Create a Room</h2>
+                <p>
+                    This page will be updated  once I have learned how to use JavaScript and CSS. You will be able to create rooms with passwords and manage them in a more user-friendly way.
+                </p>
+
+                <form action="/submit-room" method="post">
+                    <label for="room-number">Room Number:</label>
+                    <input type="text" id="room-number" name="room-number" required />
+                    <br/>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                    <br/>
+                    <input type="submit" value="Create Room" />
+                </form>
+        </main>
+    </body>
+</html>
