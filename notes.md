@@ -2,7 +2,7 @@
 working for the GitHub homework
 There is setup, commit, pushup and pull.
 
-##markdown
+## markdown
 https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 
 ##example to connect server from terminal
