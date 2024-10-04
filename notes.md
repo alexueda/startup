@@ -17,13 +17,11 @@ https://learn.cs260.click/page/webServers/https/https_md
 
 ##This is good site for the HTML Input element
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
-<<<<<<< HEAD
 
 ##HTML media
 If we want to get the address for image or video, if it is in the chrome you can right-click and choose "copy image|video address"
-=======
 
-# Project Update: Sharenote Web Pages
+## Project Update: Sharenote Web Pages
 
 ## Pages Created:
 - **about.html**: Provides information about Sharenote, explaining its purpose and how users can share to-do lists and notes.
@@ -37,8 +35,8 @@ If we want to get the address for image or video, if it is in the chrome you can
 - A GitHub link is added in the footer section of each page for easy access to the project repository.
 - The pages are deployed using a script (`deployFiles.sh`) on my domain, ensuring easy updates and deployment of changes.
 
-##css and flex
-```example code how to use it
+##css and flex (example code how to use it)
+```
 * {
   font-family: sans-serif;
   box-sizing: border-box;
