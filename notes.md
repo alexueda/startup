@@ -91,3 +91,6 @@ footer {
 ## Deployment:
 - The project is deployed via the `deployFiles.sh` script, which automates the process of uploading files to my domain.
 ```
+
+## This is a good example of how to use bootstrap
+https://codepen.io/leesjensen/pen/JjZavjW
