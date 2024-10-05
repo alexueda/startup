@@ -30,30 +30,30 @@ I am going to use the required technologies in the following ways:
 - **Database/Login**: Stores user information, shared tasks, and task statuses. Provides secure storage of credentials and task data. Only authenticated users can access and update the list.
 - **WebSocket**: Synchronizes task updates in real-time across all users, ensuring that changes made by one user are immediately visible to others.
 
-# HTML Deliverable
+### HTML Deliverable
 
 ➡️ The following is an example of the required information for the **Sharenote App HTML deliverable**.
 
 For this deliverable, I built out the structure of my application using HTML.
 
-- **HTML Pages**: 
+- [x] **HTML Pages**: 
     - Multiple HTML pages represent different sections of the app. 
     - Pages include: `index.html`, `createroom.html`, `sharenote.html`, and `about.html`.
     
-- **Links**: 
+- [x] **Links**: 
     - The home page (`index.html`) links to other key pages such as `about.html`, `createroom.html`, and `sharenote.html` for easier navigation.
     
-- **Text**: 
+- [x] **Text**: 
     - Each page provides descriptive text explaining its functionality. For example, `about.html` explains the purpose of the app, and `sharenote.html` allows users to add and share tasks.
     
-- **Images**: 
+- [x] **Images**: 
     - The `about.html` page includes an example image to enhance the content, but additional functionality will be added later.
 
-- **DB/Login**: 
+- [x] **DB/Login**: 
     - The login form is present on the home page (`index.html`), allowing users to enter a room number and password to access or create a task-sharing room.
 
-- **WebSocket**: 
+- [x] **WebSocket**: 
     - The WebSocket placeholder is set up in the `websocket.html` file. It will synchronize task updates in real-time once implemented, allowing users to see changes across devices instantly.
 
-- **Third-Party Services**: 
+- [x] **Third-Party Services**: 
     - The `third-party services.html` file includes a placeholder for future integration with services like Google Calendar, which will allow users to sync tasks with external calendars.
