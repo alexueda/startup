@@ -38,7 +38,7 @@ For this deliverable, I built out the structure of my application using HTML.
 
 - [x] **HTML Pages**: 
     - Multiple HTML pages represent different sections of the app. 
-    - Pages include: `index.html`, `createroom.html`, `sharenote.html`, and `about.html`.
+    - Pages include: `index.html`, `createroom.html`, `sharenote.html`, `about.html`, `thrid-party services.html`, and `websocket.html`.
     
 - [x] **Links**: 
     - The home page (`index.html`) links to other key pages such as `about.html`, `createroom.html`, and `sharenote.html` for easier navigation.
