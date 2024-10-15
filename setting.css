@@ -20,14 +20,19 @@ nav, header, footer {
     padding: 10px 0;
 }
 
-nav ul, #example-members ul {
+nav ul {
     list-style: none;
+    display: flex;
+    justify-content: center;
     padding: 0;
+}
+
+nav ul li {
+    margin: 0 10px;
 }
 
 nav a {
     color: #ffffff;
-    margin: 0 10px;
     text-decoration: none;
 }
 
