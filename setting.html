@@ -1,35 +1,70 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Setting</title>
-        <link rel="icon" href="favicon.ico" />
-        <link rel="stylesheet" href="setting.css">
-    </head>
-    <body>
-        <header>
-            <h1>Sharenote</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="sharenote.html">Sharenote</a></li>
-                </ul>
-            </nav>
-        </header>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharenote - Settings</title>
+    <link rel="stylesheet" href="setting.css" />
+</head>
+<body>
+    <header>
+        <h1>Sharenote</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sharenote.html">Sharenote</a></li>
+                <li><a href="createroom.html">Create Room</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-        <section id="about">
-            <h2>Setting</h2>
-            <p>
-            This is the main data control page, managing members in the room and all other kinds of settings. I will remove this once I learn more about JavaScript and CSS.
-            </p>
+        <h2>Settings</h2>
+        <p>Manage your room settings and members here.</p>
+
+        <div class="setting-options">
+            <button onclick="checkRoomMembers()">Check Room Members</button>
+            <button onclick="deleteTaskList()">Delete Task List</button>
+            <button onclick="closeRoom()">Close Room</button>
+            <button onclick="changeRoomName()">Change Room Name</button>
+        </div>
+
+        <section id="example-members" class="hidden">
+            <h3>Room Members</h3>
+            <ul>
+                <li>Alex (Owner)</li>
+                <li>Alison (Member)</li>
+                <li>John (Member)</li>
+                <li>Emma (Member)</li>
+            </ul>
         </section>
     </main>
+
     <footer>
         <hr />
-        <span class="text-reset">To access my Github below:</span>
-        <br />
-        <a href="https://github.com/alexueda/startup.git">GitHub</a>
+        <p>Connect with us on GitHub: <a href="https://github.com/alexueda/startup.git">GitHub</a></p>
     </footer>
+
+    <script>
+        function checkRoomMembers() {
+            document.getElementById('example-members').classList.toggle('hidden');
+        }
+
+        function deleteTaskList() {
+            alert("Task list deleted.");
+        }
+
+        function closeRoom() {
+            alert("Room closed.");
+        }
+
+        function changeRoomName() {
+            let newName = prompt("Enter the new room name:");
+            if (newName) {
+                alert("Room name changed to " + newName + ".");
+            }
+        }
+    </script>
+</body>
 </html>
