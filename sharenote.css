@@ -1,4 +1,4 @@
-body, h1, h2, h3, p, ul, li, form, input, label, button {
+body, h1, h2, p, ul, li, form, input, label, button {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,116 +16,134 @@ body {
 header {
     background-color: #d89216;
     color: #ffffff;
-    padding: 10px 0;
+    padding: 15px;
     text-align: center;
 }
 
 header h1 {
     font-size: 2em;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 5px 0;
-}
-
-nav ul li {
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
+    margin: 0;
 }
 
 main {
-    flex: 1;
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 15px;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 main h2 {
     font-size: 1.8em;
     color: #d89216;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-main label {
+.task-list {
+    margin-top: 20px;
+    border-top: 2px solid #d89216;
+}
+
+.task-header, .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.task-header {
     font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+    color: #333;
+    background-color: #f3f3f3;
 }
 
-input[type="text"] {
+.task-content-header, .task-person-header, .task-date-header {
+    flex: 2;
+    text-align: left;
+}
+
+.task-item {
+    font-size: 1.1em;
+}
+
+.task-status {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.task-content {
+    flex: 3;
+    text-align: left;
+}
+
+.task-person, .task-date {
+    flex: 2;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.task-item.incomplete .task-status {
+    color: red;
+}
+
+.task-item.complete .task-status {
+    color: green;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    text-align: left;
+}
+
+input[type="text"], input[type="date"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    margin-top: 5px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 button {
     background-color: #d89216;
     color: #ffffff;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.1em;
     transition: background-color 0.3s;
+    width: 100%;
 }
 
 button:hover {
     background-color: #e76f51;
 }
 
-#shared-list {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    margin-top: 20px;
-}
-
-#shared-list li {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-#shared-list li.incomplete {
-    background-color: #ffe6e6;
-    color: #ff0000;
-}
-
-#shared-list li.complete {
-    background-color: #e6ffe6;
-    color: #008000;
-}
-
-/* Footer */
 footer {
     background-color: #d89216;
     color: #ffffff;
     text-align: center;
-    padding: 10px;
-}
-
-footer hr {
-    border: none;
-    border-top: 1px solid #ffffff;
-    margin: 5px 0;
+    padding: 15px 0;
+    margin-top: auto;
 }
 
 footer a {
     color: #f4a261;
     text-decoration: none;
+    font-weight: bold;
 }
 
 footer a:hover {
     color: #ffffff;
-}
+} */

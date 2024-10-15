@@ -1,43 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sharenote</title>
-        <link rel="icon" href="favicon.ico" />
-        <link rel="stylesheet" href="sharenote.css">
-    </head>
-    <body>
-        <header>
-            <h1>Sharenote</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="setting.html">Setting</a></li>
-                    <li><a href="third-party services.html">third-party services</a></li>
-                    <li><a href="websocket.html">websocket</a></li>
-                </ul>
-            </nav>
-        </header>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharenote - Main Page</title>
+    <link rel="stylesheet" href="sharenote.css" />
+</head>
+<body>
+    <header>
+        <h1>Sharenote</h1>
+    </header>
+
     <main>
-            <h2>Share Your To-Do List or Notes</h2>
-                <label for="new-item">Add a new note in the list:</label>
-                <input type="text" id="new-item" name="new-item" placeholder="Enter your task or note" required />
-                <button type="submit">Add a new note</button>
-            <h3>Shared List</h3>
-            <ul id="shared-list">
-                <p>
-                    This page will be updated with a more once I have learned how to use JavaScript and CSS.
-                </p>
-                <li>Example item 1</li>
-                <li>Example item 2</li>
-            </ul>
+        <h2>TO-DO List</h2>
+        <div class="task-list">
+            <div class="task-header">
+                <span class="task-content-header">Content</span>
+                <span class="task-person-header">Person</span>
+                <span class="task-date-header">Date</span>
+            </div>
+            <div class="task-item incomplete">
+                <span class="task-status">🔴</span>
+                <span class="task-content">Example 1</span>
+                <span class="task-person">Alex</span>
+                <span class="task-date">2024-09-22</span>
+            </div>
+            <div class="task-item complete">
+                <span class="task-status">🟢</span>
+                <span class="task-content">Example 2</span>
+                <span class="task-person">Alex</span>
+                <span class="task-date">2024-09-20</span>
+            </div>
+            <div class="task-item incomplete">
+                <span class="task-status">🔴</span>
+                <span class="task-content">Example 3</span>
+                <span class="task-person">Alison</span>
+                <span class="task-date">2024-09-24</span>
+            </div>
+            <div class="task-item incomplete">
+                <span class="task-status">🔴</span>
+                <span class="task-content">Example 4</span>
+                <span class="task-person">Alison</span>
+                <span class="task-date">2024-09-23</span>
+            </div>
+            <div class="task-item complete">
+                <span class="task-status">🟢</span>
+                <span class="task-content">Example 5</span>
+                <span class="task-person">Alison</span>
+                <span class="task-date">2024-09-25</span>
+            </div>
+        </div>
+
+        <form id="add-task-form">
+            <label for="new-task">Add Task:</label>
+            <input type="text" id="new-task" name="new-task" placeholder="Enter your task" required />
+            <input type="text" id="task-person" name="task-person" placeholder="Enter your name" required />
+            <input type="date" id="task-date" name="task-date" required />
+            <button type="submit">Add Task</button>
+        </form>
     </main>
+
     <footer>
         <hr />
-        <span class="text-reset">To access my Github below:</span>
-        <br />
-        <a href="https://github.com/alexueda/startup.git">GitHub</a>
+        <p>Connect with us on GitHub: <a href="https://github.com/alexueda/startup.git">GitHub</a></p>
     </footer>
+</body>
 </html>
