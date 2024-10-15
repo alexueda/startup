@@ -13,6 +13,31 @@ body {
     min-height: 100vh;
 }
 
+nav {
+    background-color: #d89216;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+nav ul li a:hover {
+    color: #f4a261;
+}
+
 header {
     background-color: #d89216;
     color: #ffffff;
@@ -22,7 +47,6 @@ header {
 
 header h1 {
     font-size: 2em;
-    margin: 0;
 }
 
 main {
@@ -31,7 +55,7 @@ main {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -61,7 +85,7 @@ main h2 {
 }
 
 .task-content-header, .task-person-header, .task-date-header {
-    flex: 2;
+    flex: 1;
     text-align: left;
 }
 
@@ -75,15 +99,9 @@ main h2 {
     margin-right: 10px;
 }
 
-.task-content {
-    flex: 3;
+.task-content, .task-person, .task-date {
+    flex: 1;
     text-align: left;
-}
-
-.task-person, .task-date {
-    flex: 2;
-    text-align: left;
-    padding-left: 10px;
 }
 
 .task-item.incomplete .task-status {
@@ -96,13 +114,13 @@ main h2 {
 
 form {
     margin-top: 20px;
+    text-align: left;
 }
 
 form label {
     font-weight: bold;
-    margin-top: 10px;
     display: block;
-    text-align: left;
+    margin-top: 10px;
 }
 
 input[type="text"], input[type="date"] {
@@ -122,7 +140,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    transition: background-color 0.3s;
     width: 100%;
 }
 
@@ -139,9 +156,8 @@ footer {
 }
 
 footer a {
-    color: #f4a261;
+    color: #000000;
     text-decoration: none;
-    font-weight: bold;
 }
 
 footer a:hover {
