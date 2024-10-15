@@ -1,33 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="websocket.css">
-
 <head>
-    <title>Task Management App Placeholder</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Management - Log & Messages</title>
+    <link rel="stylesheet" href="websocket.css">
 </head>
-
 <body>
     <div class="container">
-        <header class="my-4">
-            <h1>Task Management App - Placeholder</h1>
-            <p>This app helps families and groups manage shared tasks efficiently with real-time updates.</p>
-
+        <header>
+            <h1>Task Management</h1>
+            <p>Real-time log and messaging</p>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="createroom.html">Create Room</a></li>
-                    <li><a href="sharenote.html">Sharenote Main App</a></li>
+                    <li><a href="sharenote.html">Sharenote</a></li>
+                    <li><a href="websocket.html">WebSocket</a></li>
                 </ul>
-                
+            </nav>
         </header>
 
-        <footer class="mt-4">
-            <p class="text-muted">&copy; 2024 Task Management App</p>
+        <main>
+            <section>
+                <h2>Activity Log</h2>
+                <ul id="log-messages">
+                    <li>Alison added a new task: "Prepare for meeting."</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Leave a Message</h2>
+                <ul id="message-list">
+                    <li><strong>Alex:</strong> Don’t forget the documents!</li>
+                </ul>
+                <form id="message-form">
+                    <input type="text" id="message-input" placeholder="Message" required />
+                    <input type="text" id="message-person-input" placeholder="Name" required />
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Task Management | <a href="https://github.com/alexueda/startup.git" target="_blank">GitHub</a></p>
         </footer>
     </div>
 
+    <script>
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = document.getElementById('message-input').value;
+            const person = document.getElementById('message-person-input').value;
 
+            document.getElementById('message-list').innerHTML += `<li><strong>${person}:</strong> ${message}</li>`;
+            document.getElementById('log-messages').innerHTML += `<li>${person} sent a message: "${message}".</li>`;
+
+            document.getElementById('message-input').value = '';
+            document.getElementById('message-person-input').value = '';
+        });
+    </script>
 </body>
-
 </html>

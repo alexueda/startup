@@ -57,3 +57,27 @@ For this deliverable, I built out the structure of my application using HTML.
 
 - [x] **Third-Party Services**: 
     - The `third-party services.html` file includes a placeholder for future integration with services like Google Calendar, which will allow users to sync tasks with external calendars.
+
+### CSS Deliverable
+
+➡️ The following summarizes the **Sharenote App CSS deliverable**.
+
+For this deliverable, I applied consistent and responsive styling across all pages.
+
+- [x] **Header, Footer, and Main Content**: 
+    - Unified design with a centered layout, background color, and subtle shadows for depth.
+
+- [x] **Navigation Elements**: 
+    - Horizontal navigation with no underlines, white text, and hover effects for easy readability.
+
+- [x] **Responsive Design**: 
+    - Flexible layout that adapts to various screen sizes, ensuring a smooth user experience on mobile and desktop.
+
+- [x] **Buttons and Forms**: 
+    - Rounded buttons with hover effects. Input fields are styled with consistent spacing and focus states.
+
+- [x] **Text Content**: 
+    - Arial font with clear color contrasts. Titles are color-coded to enhance section visibility.
+
+- [x] **Activity Log and Messaging**: 
+    - Simple list layout with padding and borders for clear separation between items.

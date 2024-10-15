@@ -1,4 +1,4 @@
-body, h1, p, ul, li, a {
+body, h1, h2, p, ul, li, input, button {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,44 +13,30 @@ body {
     min-height: 100vh;
 }
 
-
 .container {
-    width: 90%;
-    max-width: 800px;
+    max-width: 700px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    margin: 20px;
 }
-
 
 header {
     text-align: center;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #d89216;
 }
 
 header h1 {
-    font-size: 2em;
     color: #d89216;
-    margin-bottom: 10px;
-}
-
-header p {
-    margin-bottom: 15px;
-    font-size: 1em;
-    line-height: 1.6;
-    color: #4b4b4b;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
     background-color: #d89216;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 nav ul li {
@@ -60,28 +46,58 @@ nav ul li {
 nav ul li a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s;
 }
 
-nav ul li a:hover {
-    color: #ffd700;
+main h2 {
+    font-size: 1.2em;
+    color: #d89216;
+    margin: 15px 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+input[type="text"] {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin: 5px 5px 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #d89216;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e76f51;
 }
 
 footer {
     text-align: center;
-    padding: 10px 0;
     margin-top: 20px;
-    background-color: #d89216;
     color: #ffffff;
-    border-radius: 8px;
+    background-color: #d89216;
+    padding: 10px;
 }
 
-footer p {
-    font-size: 0.9em;
-    color: #f4a261;
+footer a {
+    color: #000000;
+    text-decoration: none;
 }
 
-footer p.text-muted {
+footer a:hover {
     color: #ffffff;
 }
