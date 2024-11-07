@@ -1,8 +1,6 @@
-// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// 各コンポーネントをインポート
 import Home from './components/Home';
 import About from './components/About';
 import CreateRoom from './components/CreateRoom';
