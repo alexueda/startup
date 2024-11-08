@@ -1,154 +1,111 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #fdf6e3;
-    color: #4b4b4b;
-  }
-  
-  header {
-    background-color: #d89216;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    width: 100%;
-  }
-  
-  header h1 {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    background-color: #d89216;
-    padding: 10px 0;
-    width: 100%;
-  }
-  
-  nav ul li {
-    margin: 0 15px;
-  }
-  
-  nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s;
-  }
-  
-  nav ul li a:hover {
-    color: #ffd700;
-  }
-  
-  main {
-    flex: 1;
-    width: 90%; /* Expand main content width */
-    max-width: 1000px; /* Increase maximum width */
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  main h2 {
-    font-size: 2em;
-    color: #d89216;
-    margin-bottom: 1em;
-  }
-  
-  .task-list {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #ffffff;
-    width: 100%;
-  }
-  
-  .task-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .task-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-  }
-  
-  .task-item.complete .task-status {
-    color: green;
-  }
-  
-  .task-item.incomplete .task-status {
-    color: red;
-  }
-  
-  form#add-task-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  form label {
-    font-weight: bold;
-  }
-  
-  form input[type="text"],
-  form input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-  }
-  
-  form button {
-    padding: 12px 25px;
-    background-color: #f4a261;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  form button:hover {
-    background-color: #e76f51;
-  }
-  
-  footer {
-    background-color: #d89216;
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-  }
-  
-  footer a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  
-  footer a:hover {
-    color: #ffd700;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #fdf6e3;
+  color: #4b4b4b;
+}
+
+header {
+  background-color: #d89216;
+  color: #ffffff;
+  text-align: center;
+  padding: 15px 0;
+  width: 100%;
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+nav {
+  background-color: #d89216;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ffd700;
+}
+
+main {
+  flex: 1;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+main h2 {
+  font-size: 2em;
+  color: #d89216;
+  margin-bottom: 1em;
+}
+
+.task-list {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+form#add-task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+footer {
+  background-color: #d89216;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}

@@ -25,7 +25,6 @@ function Settings() {
 
   return (
     <div className="page-container">
-      {/* Header */}
       <header>
         <h1>Sharenote</h1>
         <nav>
@@ -38,7 +37,6 @@ function Settings() {
         </nav>
       </header>
 
-      {/* Main Content */}
       <main>
         <h2>Settings</h2>
         <p>Manage your room settings and members here.</p>
@@ -63,7 +61,6 @@ function Settings() {
         )}
       </main>
 
-      {/* Footer */}
       <footer>
         <hr />
         <p>
