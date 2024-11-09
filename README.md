@@ -81,3 +81,34 @@ For this deliverable, I applied consistent and responsive styling across all pag
 
 - [x] **Activity Log and Messaging**: 
     - Simple list layout with padding and borders for clear separation between items.
+
+## React Deliverable
+➡️ Below is the required information for the Startup React deliverable.
+
+For this deliverable, I used JavaScript and React to ensure the application functions smoothly for a single user. Additionally, I incorporated placeholders for future technology.
+
+### Modifications and Features Completed
+
+- [x] **Bundled and Transpiled** - Application has been bundled and transpiled for optimized performance.
+- [x] **Components** - Created reusable components, including:
+  - `Home`
+  - `About`
+  - `CreateRoom`
+  - `Sharenote`
+  - `ThirdPartyServices`
+  - `Settings`
+  - `WebSocket`
+- [x] **Database Integration** - Currently using local storage to display and store data, which will be replaced with a database in future updates.
+- [x] **WebSocket Simulation** - created some memo system to simulate WebSocket functionality by periodically updating messages. This will be replaced with actual WebSocket integration.
+- [x] **Router** - Implemented React Router for smooth navigation between components:
+  - Login
+  - Task Management (To-Do List)
+  - Settings
+  - Third-Party Services
+- [x] **React Hooks** - Used `useState` and `useEffect` hooks for managing component state and simulating real-time updates within components.
+
+### Future Enhancements
+
+- [ ] **Database Implementation** - Replace local storage with a database to persist user data across sessions.
+- [ ] **WebSocket Integration** - Implement real WebSocket connections for live message and task updates. Also, uppdate the design.
+- [ ] **Authentication** - Secure user login functionality for multiple user support.
