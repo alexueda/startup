@@ -106,9 +106,3 @@ For this deliverable, I used JavaScript and React to ensure the application func
   - Settings
   - Third-Party Services
 - [x] **React Hooks** - Used `useState` and `useEffect` hooks for managing component state and simulating real-time updates within components.
-
-### Future Enhancements
-
-- [ ] **Database Implementation** - Replace local storage with a database to persist user data across sessions.
-- [ ] **WebSocket Integration** - Implement real WebSocket connections for live message and task updates. Also, uppdate the design.
-- [ ] **Authentication** - Secure user login functionality for multiple user support.
