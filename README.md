@@ -99,10 +99,10 @@ For this deliverable, I used JavaScript and React to ensure the application func
   - `Settings`
   - `WebSocket`
 - [x] **Database Integration** - Currently using local storage to display and store data, which will be replaced with a database in future updates.
-- [x] **WebSocket Simulation** - created some memo system to simulate WebSocket functionality by periodically updating messages. This will be replaced with actual WebSocket integration.
+- [x] **WebSocket Simulation** - Created a memo system to simulate WebSocket functionality by periodically updating messages. This will be replaced with actual WebSocket integration.
 - [x] **Router** - Implemented React Router for smooth navigation between components:
   - Login
   - Task Management (To-Do List)
   - Settings
   - Third-Party Services
-- [x] **React Hooks** - Used `useState` and `useEffect` hooks for managing component state and simulating real-time updates within components.
+- [x] **React Hooks** - Used `useState` and `useEffect` hooks to manage component state and simulate real-time updates within components. Additional functionality was modularized using custom hooks, like `useTaskActions` in `Settings` for handling user interactions with tasks.

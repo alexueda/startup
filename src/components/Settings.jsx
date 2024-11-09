@@ -5,24 +5,30 @@ import './settings.css';
 function Settings() {
   const [showMembers, setShowMembers] = useState(false);
 
-  const checkRoomMembers = () => {
-    setShowMembers(!showMembers);
+  const toggleRoomMembers = () => {
+    setShowMembers((prev) => !prev);
   };
 
-  const deleteTaskList = () => {
-    alert("Task list deleted.");
+  const useTaskActions = () => {
+    const deleteTaskList = () => {
+      alert("Task list deleted.");
+    };
+
+    const closeRoom = () => {
+      alert("Room closed.");
+    };
+
+    const changeRoomName = () => {
+      const newName = prompt("Enter the new room name:");
+      if (newName) {
+        alert("Room name changed to " + newName + ".");
+      }
+    };
+
+    return { deleteTaskList, closeRoom, changeRoomName };
   };
 
-  const closeRoom = () => {
-    alert("Room closed.");
-  };
-
-  const changeRoomName = () => {
-    const newName = prompt("Enter the new room name:");
-    if (newName) {
-      alert("Room name changed to " + newName + ".");
-    }
-  };
+  const { deleteTaskList, closeRoom, changeRoomName } = useTaskActions();
 
   return (
     <div className="page-container">
@@ -43,7 +49,7 @@ function Settings() {
         <p>Manage your room settings and members here.</p>
 
         <div className="setting-options">
-          <button onClick={checkRoomMembers}>Check Room Members</button>
+          <button onClick={toggleRoomMembers}>Check Room Members</button>
           <button onClick={deleteTaskList}>Delete Task List</button>
           <button onClick={closeRoom}>Close Room</button>
           <button onClick={changeRoomName}>Change Room Name</button>
