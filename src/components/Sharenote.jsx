@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./sharenote.css";
+import './sharenote.css';
 
 function Sharenote() {
   return (
     <div className="page-container">
+      <header>
+        <h1>Sharenote</h1>
+      </header>
+
       <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/createroom">Create Room</Link></li>
           <li><Link to="/thirdpartyservices">Third Party Services</Link></li>
-          <li><Link to="/websocket">Websocket</Link></li>
+          <li><Link to="/websocket">WebSocket</Link></li>
           <li><Link to="/settings">Settings</Link></li>
         </ul>
       </nav>
-
-      <header>
-        <h1>Sharenote</h1>
-      </header>
 
       <main>
         <h2>TO-DO List</h2>
@@ -34,30 +34,7 @@ function Sharenote() {
             <span className="task-person">Alex</span>
             <span className="task-date">2024-09-22</span>
           </div>
-          <div className="task-item complete">
-            <span className="task-status">🟢</span>
-            <span className="task-content">Example 2</span>
-            <span className="task-person">Alex</span>
-            <span className="task-date">2024-09-20</span>
-          </div>
-          <div className="task-item incomplete">
-            <span className="task-status">🔴</span>
-            <span className="task-content">Example 3</span>
-            <span className="task-person">Alison</span>
-            <span className="task-date">2024-09-24</span>
-          </div>
-          <div className="task-item incomplete">
-            <span className="task-status">🔴</span>
-            <span className="task-content">Example 4</span>
-            <span className="task-person">Alison</span>
-            <span className="task-date">2024-09-23</span>
-          </div>
-          <div className="task-item complete">
-            <span className="task-status">🟢</span>
-            <span className="task-content">Example 5</span>
-            <span className="task-person">Alison</span>
-            <span className="task-date">2024-09-25</span>
-          </div>
+          {/* Add other task items here */}
         </div>
 
         <form id="add-task-form">

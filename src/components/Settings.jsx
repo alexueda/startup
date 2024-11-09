@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './settings.css';
 
 function Settings() {
   const [showMembers, setShowMembers] = useState(false);
