@@ -31,7 +31,7 @@ function Home() {
 
       <footer>
         <hr />
-        <span className="text-reset">To access my Github below:</span>
+        <span className="text-reset">To access alexueda's Github below:</span>
         <br />
         <a href="https://github.com/alexueda/startup.git" target="_blank" rel="noopener noreferrer">GitHub</a>
       </footer>
