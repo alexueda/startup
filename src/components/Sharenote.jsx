@@ -1,92 +1,155 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './sharenote.css';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./sharenote.css";
 
 function Sharenote() {
-  const [tasks, setTasks] = useState([
-    { content: 'Example 1', person: 'Alex', date: '2024-09-22', complete: false },
-    { content: 'Example 2', person: 'Alison', date: '2024-09-24', complete: true },
-  ]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const roomNumber = new URLSearchParams(location.search).get("roomNumber");
+  const [tasks, setTasks] = useState([]);
+  const [taskContent, setTaskContent] = useState("");
+  const [taskPerson, setTaskPerson] = useState("");
+  const [taskDate, setTaskDate] = useState("");
+  const [message, setMessage] = useState("");
 
-  const [taskContent, setTaskContent] = useState('');
-  const [taskPerson, setTaskPerson] = useState('');
-  const [taskDate, setTaskDate] = useState('');
-
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (taskContent && taskPerson && taskDate) {
-      const newTask = {
-        content: taskContent,
-        person: taskPerson,
-        date: taskDate,
-        complete: false,
+  useEffect(() => {
+    if (roomNumber) {
+      const fetchTasks = async () => {
+        try {
+          const response = await fetch(`/api/room/${roomNumber}/tasks`);
+          if (response.ok) {
+            const data = await response.json();
+            setTasks(data.tasks);
+          } else {
+            setMessage("Failed to load tasks.");
+          }
+        } catch (error) {
+          console.error("Error fetching tasks:", error);
+          setMessage("Error fetching tasks.");
+        }
       };
-      setTasks([...tasks, newTask]);
-      setTaskContent('');
-      setTaskPerson('');
-      setTaskDate('');
+
+      fetchTasks();
+    } else {
+      navigate("/");
+    }
+  }, [roomNumber, navigate]);
+
+  const handleAddTask = async (e) => {
+    e.preventDefault();
+
+    if (!taskContent || !taskPerson || !taskDate) {
+      setMessage("All fields are required to add a task.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/room/${roomNumber}/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: taskContent,
+          person: taskPerson,
+          date: taskDate,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setTasks(data.tasks);
+        setTaskContent("");
+        setTaskPerson("");
+        setTaskDate("");
+        setMessage("Task added successfully!");
+      } else {
+        const data = await response.json();
+        setMessage(data.msg || "Failed to add task.");
+      }
+    } catch (error) {
+      console.error("Error adding task:", error);
+      setMessage("Error adding task.");
+    }
+  };
+
+  const handleDeleteTask = (taskIndex) => {
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      const updatedTasks = tasks.filter((_, index) => index !== taskIndex);
+      setTasks(updatedTasks);
+      alert("Task deleted successfully!");
     }
   };
 
   return (
-    <div className="page-container">
-      <header>
+    <div className="sharenote-container">
+      <header className="sharenote-header">
         <h1>Sharenote</h1>
+        <nav>
+          <ul className="sharenote-nav">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/thirdpartyservices">Third Party Services</Link></li>
+            <li><Link to="/websocket">WebSocket</Link></li>
+          </ul>
+        </nav>
       </header>
 
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/createroom">Create Room</Link></li>
-          <li><Link to="/thirdpartyservices">Third Party Services</Link></li>
-          <li><Link to="/websocket">WebSocket</Link></li>
-          <li><Link to="/settings">Settings</Link></li>
-        </ul>
-      </nav>
+      <main className="sharenote-main">
+        <h2>TO-DO List for Room {roomNumber}</h2>
+        {message && <p className="message">{message}</p>}
 
-      <main>
-        <h2>TO-DO List</h2>
         <div className="task-list">
           <div className="task-header">
-            <span className="task-content-header">Content</span>
-            <span className="task-person-header">Person</span>
-            <span className="task-date-header">Date</span>
+            <span>Check</span>
+            <span>Task</span>
+            <span>Person</span>
+            <span>Date</span>
+            <span>Actions</span>
           </div>
           {tasks.map((task, index) => (
-            <div key={index} className={`task-item ${task.complete ? 'complete' : 'incomplete'}`}>
-              <span className="task-status">{task.complete ? '🟢' : '🔴'}</span>
+            <div
+              key={index}
+              className={`task-item ${task.complete ? "complete" : "incomplete"}`}
+            >
+              <input
+                type="checkbox"
+                checked={task.complete}
+                onChange={() => {
+                  const updatedTasks = [...tasks];
+                  updatedTasks[index].complete = !updatedTasks[index].complete;
+                  setTasks(updatedTasks);
+                }}
+              />
               <span className="task-content">{task.content}</span>
               <span className="task-person">{task.person}</span>
               <span className="task-date">{task.date}</span>
+              <button
+                className="delete-task-button"
+                onClick={() => handleDeleteTask(index)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
 
-        <form id="add-task-form" onSubmit={handleAddTask}>
-          <label htmlFor="new-task">Add Task:</label>
+        <form className="task-form" onSubmit={handleAddTask}>
           <input
             type="text"
-            id="new-task"
-            name="new-task"
-            placeholder="Enter your task"
+            placeholder="Enter task"
             value={taskContent}
             onChange={(e) => setTaskContent(e.target.value)}
             required
           />
           <input
             type="text"
-            id="task-person"
-            name="task-person"
-            placeholder="Enter your name"
+            placeholder="Your name"
             value={taskPerson}
             onChange={(e) => setTaskPerson(e.target.value)}
             required
           />
           <input
             type="date"
-            id="task-date"
-            name="task-date"
             value={taskDate}
             onChange={(e) => setTaskDate(e.target.value)}
             required
@@ -95,11 +158,15 @@ function Sharenote() {
         </form>
       </main>
 
-      <footer>
+      <footer className="sharenote-footer">
         <hr />
         <p>
           Connect with us on GitHub:{" "}
-          <a href="https://github.com/alexueda/startup.git" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/alexueda/startup.git"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
           </a>
         </p>

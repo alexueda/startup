@@ -4,7 +4,8 @@ import Home from './components/Home';
 import About from './components/About';
 import CreateRoom from './components/CreateRoom';
 import Sharenote from './components/Sharenote';
-import Settings from './components/Settings';
+import ThirdPartyServices from './components/ThirdPartyServices';
+import WebSocket from './components/WebSocket';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/createroom" element={<CreateRoom />} />
         <Route path="/sharenote" element={<Sharenote />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/thirdpartyservices" element={<ThirdPartyServices />} />
+        <Route path="/websocket" element={<WebSocket />} />
       </Routes>
     </Router>
   );

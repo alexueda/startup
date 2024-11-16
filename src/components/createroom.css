@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fef9e7;
+  color: #4a4a4a;
+}
+
+.createroom-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.createroom-header {
+  background-color: #d89216;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createroom-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.createroom-nav {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.createroom-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.createroom-nav a:hover {
+  text-decoration: underline;
+}
+
+.createroom-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createroom-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.createroom-card h2 {
+  margin-bottom: 1rem;
+  color: #d89216;
+}
+
+.createroom-card input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.createroom-card button {
+  background-color: #d89216;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.createroom-card button:hover {
+  background-color: #c07e14;
+}
+
+.createroom-message {
+  color: #d9534f;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.createroom-footer {
+  background-color: #d89216;
+  text-align: center;
+  padding: 1rem;
+  color: white;
+}
+
+.createroom-footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.createroom-footer a:hover {
+  text-decoration: none;
+}

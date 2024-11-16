@@ -1,47 +1,96 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./home.css";
 
 function Home() {
+  const [roomNumber, setRoomNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const handleCreateClick = (e) => {
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    navigate('/createroom');
+
+    try {
+      const response = await fetch("/api/room/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ roomNumber, password }),
+      });
+
+      if (response.ok) {
+        setMessage("Login successful!");
+        navigate(`/sharenote?roomNumber=${roomNumber}`);
+      } else {
+        const data = await response.json();
+        setMessage(data.msg || "Login failed.");
+      }
+    } catch (error) {
+      setMessage("Error logging in.");
+    }
   };
 
   return (
-    <div className="page-container">
-      <header>
+    <div className="home-container">
+      <header className="home-header">
         <h1>Sharenote</h1>
         <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/createroom">Create Room</Link></li>
+          <ul className="home-nav">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/about">About</a>
+            </li>
+            <li>
+              <a href="/createroom">Create Room</a>
+            </li>
           </ul>
         </nav>
       </header>
-
-      <main>
-        <h1>Welcome to Sharenote</h1>
-        <form>
-          <div>
-            <input type="text" placeholder="Room-number" />
-          </div>
-          <div>
-            <input type="password" placeholder="Password" />
-          </div>
-          <button type="submit">Login</button>
-          <button type="button" style={{ marginLeft: '10px' }} onClick={handleCreateClick}>
-            Create
+      <main className="home-main">
+        <div className="home-card">
+          <h2>Welcome to Sharenote</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="text"
+              placeholder="Room Number"
+              value={roomNumber}
+              onChange={(e) => setRoomNumber(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
+          {message && <p className="home-message">{message}</p>}
+          <button
+            className="create-room-button"
+            onClick={() => navigate("/createroom")}
+          >
+            Create Room
           </button>
-        </form>
+        </div>
       </main>
-
-      <footer>
+      <footer className="home-footer">
         <hr />
-        <span className="text-reset">To access alexueda's Github below:</span>
-        <br />
-        <a href="https://github.com/alexueda/startup.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <p>
+          Connect with us on GitHub:{" "}
+          <a
+            href="https://github.com/alexueda/startup.git"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </p>
       </footer>
     </div>
   );
