@@ -106,3 +106,33 @@ For this deliverable, I used JavaScript and React to ensure the application func
   - Settings
   - Third-Party Services
 - [x] **React Hooks** - Used `useState` and `useEffect` hooks to manage component state and simulate real-time updates within components. Additional functionality was modularized using custom hooks, like `useTaskActions` in `Settings` for handling user interactions with tasks.
+
+### Service deliverable
+
+➡️ The following summarizes the **Service deliverable**.
+
+For this deliverable, I developed both backend services and frontend pages to enable task sharing, messaging, and third-party integrations.
+
+- [x] **Backend Service Endpoints**:
+  - Implemented endpoints to:
+    - Create rooms, add tasks, fetch tasks, and delete tasks.
+    - Send and log messages in real-time (WebSocket simulation).
+  - Simple in-memory data structure for task and room management.
+
+- [x] **Frontend Integration**:
+  - Built pages for Home, About, Create Room, Sharenote, Third-Party Services, and WebSocket using React.
+  - Connected frontend with backend endpoints using `fetch`.
+  - Added state management for tasks, members, and messaging.
+
+- [x] **Third-Party Service Integration**:
+  - Buttons for connecting to Google Calendar and Google Docs.
+  - External links configured for seamless access.
+
+- [x] **Styling and Layout**:
+  - Applied consistent styling across all pages.
+  - Responsive design with layouts adaptable to different screen sizes.
+
+- [x] **WebSocket Messaging and Activity Log**:
+  - Created a clean UI for sending messages and viewing activity logs.
+  - Messages include timestamps for better tracking.
+
