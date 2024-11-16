@@ -3,13 +3,10 @@ import express from 'express';
 const app = express();
 const port = 4000;
 
-// In-memory storage for rooms
-let rooms = {}; // Format: { roomNumber: { password: 'password', tasks: [] } }
+let rooms = {};
 
-// Middleware to parse JSON
 app.use(express.json());
 
-// Create a new room
 app.post('/api/room/create', (req, res) => {
   const { roomNumber, password } = req.body;
 
@@ -25,7 +22,6 @@ app.post('/api/room/create', (req, res) => {
   res.status(201).send({ msg: 'Room created successfully!' });
 });
 
-// Login to a room
 app.post('/api/room/login', (req, res) => {
   const { roomNumber, password } = req.body;
 
@@ -56,7 +52,6 @@ app.get('/api/room/:roomNumber/tasks', (req, res) => {
   res.status(200).send({ tasks: room.tasks });
 });
 
-// Add a task to a specific room
 app.post('/api/room/:roomNumber/tasks', (req, res) => {
   const room = rooms[req.params.roomNumber];
 
@@ -74,12 +69,10 @@ app.post('/api/room/:roomNumber/tasks', (req, res) => {
   res.status(201).send({ tasks: room.tasks });
 });
 
-// Catch-all route for undefined endpoints
 app.use((req, res) => {
   res.status(404).send({ msg: 'Endpoint not found.' });
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
