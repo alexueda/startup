@@ -1,111 +1,85 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
-let users = {};
-let rooms = {};
+const port = 4000;
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+// In-memory storage for rooms
+let rooms = {}; // Format: { roomNumber: { password: 'password', tasks: [] } }
 
+// Middleware to parse JSON
 app.use(express.json());
-app.use(express.static('public'));
 
-const apiRouter = express.Router();
-app.use('/api', apiRouter);
+// Create a new room
+app.post('/api/room/create', (req, res) => {
+  const { roomNumber, password } = req.body;
 
-apiRouter.post('/auth/create', async (req, res) => {
-  const { email, password } = req.body;
-  if (users[email]) {
-    return res.status(409).send({ msg: 'User already exists' });
+  if (!roomNumber || !password) {
+    return res.status(400).send({ msg: 'Room number and password are required.' });
   }
-  const user = { email, password, token: uuidv4() };
-  users[email] = user;
-  res.send({ token: user.token });
+
+  if (rooms[roomNumber]) {
+    return res.status(409).send({ msg: 'Room already exists.' });
+  }
+
+  rooms[roomNumber] = { password, tasks: [] };
+  res.status(201).send({ msg: 'Room created successfully!' });
 });
 
-apiRouter.post('/auth/login', async (req, res) => {
-  const { email, password } = req.body;
-  const user = users[email];
-  if (user && user.password === password) {
-    user.token = uuidv4();
-    return res.send({ token: user.token });
-  }
-  res.status(401).send({ msg: 'Invalid credentials' });
-});
+// Login to a room
+app.post('/api/room/login', (req, res) => {
+  const { roomNumber, password } = req.body;
 
-apiRouter.delete('/auth/logout', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
-  if (user) {
-    delete user.token;
-  }
-  res.status(204).end();
-});
-
-apiRouter.post('/room/create', (req, res) => {
-  const { token, roomName, roomPassword } = req.body;
-  const user = Object.values(users).find((u) => u.token === token);
-
-  if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
+  if (!roomNumber || !password) {
+    return res.status(400).send({ msg: 'Room number and password are required.' });
   }
 
-  if (rooms[roomName]) {
-    return res.status(409).send({ msg: 'Room already exists' });
-  }
-
-  rooms[roomName] = { roomPassword, owner: user.email, members: [user.email] };
-  res.send({ msg: 'Room created successfully' });
-});
-
-apiRouter.post('/room/join', (req, res) => {
-  const { token, roomName, roomPassword } = req.body;
-  const user = Object.values(users).find((u) => u.token === token);
-
-  if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
-  }
-
-  const room = rooms[roomName];
+  const room = rooms[roomNumber];
   if (!room) {
-    return res.status(404).send({ msg: 'Room not found' });
+    return res.status(404).send({ msg: 'Room not found.' });
   }
 
-  if (room.roomPassword !== roomPassword) {
-    return res.status(403).send({ msg: 'Incorrect room password' });
+  if (room.password !== password) {
+    return res.status(403).send({ msg: 'Incorrect password.' });
   }
 
-  if (!room.members.includes(user.email)) {
-    room.members.push(user.email);
-  }
-
-  res.send({ msg: `Joined room ${roomName}` });
+  res.status(200).send({ msg: 'Login successful.' });
 });
 
-apiRouter.get('/room/:roomName', (req, res) => {
-  const { token } = req.query;
-  const user = Object.values(users).find((u) => u.token === token);
+// Get tasks for a specific room
+app.get('/api/room/:roomNumber/tasks', (req, res) => {
+  const room = rooms[req.params.roomNumber];
 
-  if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
-  }
-
-  const room = rooms[req.params.roomName];
   if (!room) {
-    return res.status(404).send({ msg: 'Room not found' });
+    return res.status(404).send({ msg: 'Room not found.' });
   }
 
-  res.send({
-    roomName: req.params.roomName,
-    owner: room.owner,
-    members: room.members,
-  });
+  res.status(200).send({ tasks: room.tasks });
 });
 
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
+// Add a task to a specific room
+app.post('/api/room/:roomNumber/tasks', (req, res) => {
+  const room = rooms[req.params.roomNumber];
+
+  if (!room) {
+    return res.status(404).send({ msg: 'Room not found.' });
+  }
+
+  const { content, person, date } = req.body;
+
+  if (!content || !person || !date) {
+    return res.status(400).send({ msg: 'Task content, person, and date are required.' });
+  }
+
+  room.tasks.push({ content, person, date, complete: false });
+  res.status(201).send({ tasks: room.tasks });
+});
+
+// Catch-all route for undefined endpoints
+app.use((req, res) => {
+  res.status(404).send({ msg: 'Endpoint not found.' });
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
