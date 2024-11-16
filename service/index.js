@@ -5,7 +5,7 @@ const app = express();
 let users = {};
 let rooms = {};
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -105,6 +105,7 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
