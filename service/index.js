@@ -1,13 +1,18 @@
 import express from 'express';
 
 const app = express();
-const port = 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 let rooms = {};
 
 app.use(express.json());
 
-app.post('/api/room/create', (req, res) => {
+app.use(express.static('public'));
+
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
+
+apiRouter.post('/room/create', (req, res) => {
   const { roomNumber, password } = req.body;
 
   if (!roomNumber || !password) {
@@ -22,7 +27,8 @@ app.post('/api/room/create', (req, res) => {
   res.status(201).send({ msg: 'Room created successfully!' });
 });
 
-app.post('/api/room/login', (req, res) => {
+
+apiRouter.post('/room/login', (req, res) => {
   const { roomNumber, password } = req.body;
 
   if (!roomNumber || !password) {
@@ -41,8 +47,7 @@ app.post('/api/room/login', (req, res) => {
   res.status(200).send({ msg: 'Login successful.' });
 });
 
-// Get tasks for a specific room
-app.get('/api/room/:roomNumber/tasks', (req, res) => {
+apiRouter.get('/room/:roomNumber/tasks', (req, res) => {
   const room = rooms[req.params.roomNumber];
 
   if (!room) {
@@ -52,7 +57,7 @@ app.get('/api/room/:roomNumber/tasks', (req, res) => {
   res.status(200).send({ tasks: room.tasks });
 });
 
-app.post('/api/room/:roomNumber/tasks', (req, res) => {
+apiRouter.post('/room/:roomNumber/tasks', (req, res) => {
   const room = rooms[req.params.roomNumber];
 
   if (!room) {
