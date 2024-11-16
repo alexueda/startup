@@ -1,7 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+  const handleCreateClick = (e) => {
+    e.preventDefault();
+    navigate('/createroom');
+  };
+
   return (
     <div className="page-container">
       <header>
@@ -17,7 +23,7 @@ function Home() {
 
       <main>
         <h1>Welcome to Sharenote</h1>
-        <form method="get" action="/play">
+        <form>
           <div>
             <input type="text" placeholder="Room-number" />
           </div>
@@ -25,7 +31,9 @@ function Home() {
             <input type="password" placeholder="Password" />
           </div>
           <button type="submit">Login</button>
-          <button type="submit" style={{ marginLeft: '10px' }}>Create</button>
+          <button type="button" style={{ marginLeft: '10px' }} onClick={handleCreateClick}>
+            Create
+          </button>
         </form>
       </main>
 
