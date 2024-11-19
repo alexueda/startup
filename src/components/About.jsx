@@ -12,9 +12,7 @@ function About() {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about" className="active">About</Link></li>
             <li><Link to="/createroom">Create Room</Link></li>
-            <li><Link to="/sharenote">Sharenote</Link></li>
             <li><Link to="/thirdpartyservices">Third Party Services</Link></li>
-            <li><Link to="/websocket">WebSocket</Link></li>
           </ul>
         </nav>
       </header>

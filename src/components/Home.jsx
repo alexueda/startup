@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./home.css";
 
 function Home() {
@@ -28,7 +28,8 @@ function Home() {
         setMessage(data.msg || "Login failed.");
       }
     } catch (error) {
-      setMessage("Error logging in.");
+      setMessage("Error logging in. Please try again later.");
+      console.error("Login error:", error);
     }
   };
 
@@ -39,13 +40,13 @@ function Home() {
         <nav>
           <ul className="home-nav">
             <li>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <a href="/createroom">Create Room</a>
+              <Link to="/createroom">Create Room</Link>
             </li>
           </ul>
         </nav>
@@ -82,7 +83,7 @@ function Home() {
       <footer className="home-footer">
         <hr />
         <p>
-          Connect with us on GitHub:{" "}
+          Visit us on GitHub:{" "}
           <a
             href="https://github.com/alexueda/startup.git"
             target="_blank"
