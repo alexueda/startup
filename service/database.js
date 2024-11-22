@@ -1,5 +1,5 @@
-const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+import { MongoClient } from 'mongodb';
+import config from './dbConfig.json' assert { type: 'json' };
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
@@ -16,7 +16,6 @@ let db;
   }
 })();
 
-const usersCollection = client.db('startup').collection('users');
-const tasksCollection = client.db('startup').collection('tasks');
+const usersCollection = () => db.collection('users');
 
-module.exports = { db, usersCollection, tasksCollection };
+export { usersCollection };

@@ -3,13 +3,26 @@ import { useNavigate, Link } from "react-router-dom";
 import "./createroom.css";
 
 function CreateRoom() {
-  const [roomNumber, setRoomNumber] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ roomNumber: "", password: "" });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleCreateRoom = async (e) => {
     e.preventDefault();
+    const { roomNumber, password } = formData;
+
+    if (!roomNumber || !password) {
+      setMessage("Please fill in all fields.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/room/create", {
@@ -22,13 +35,14 @@ function CreateRoom() {
 
       if (response.ok) {
         setMessage("Room created successfully!");
-        navigate("/");
+        setTimeout(() => navigate("/"), 1500);
       } else {
         const data = await response.json();
         setMessage(data.msg || "Failed to create room.");
       }
     } catch (error) {
-      setMessage("Error creating room.");
+      console.error("Error creating room:", error);
+      setMessage("An unexpected error occurred. Please try again.");
     }
   };
 
@@ -50,16 +64,18 @@ function CreateRoom() {
           <form onSubmit={handleCreateRoom}>
             <input
               type="text"
+              name="roomNumber"
               placeholder="Room Number"
-              value={roomNumber}
-              onChange={(e) => setRoomNumber(e.target.value)}
+              value={formData.roomNumber}
+              onChange={handleChange}
               required
             />
             <input
               type="password"
+              name="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               required
             />
             <button type="submit">Create Room</button>
