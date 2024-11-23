@@ -136,3 +136,41 @@ For this deliverable, I developed both backend services and frontend pages to en
   - Created a clean UI for sending messages and viewing activity logs.
   - Messages include timestamps for better tracking.
 
+### DB/Login Deliverable
+
+➡️ The following summarizes the **DB/Login deliverable**.
+
+For this deliverable, I developed a backend authentication system and integrated it with a frontend to enable secure room creation, login, and task management functionality.
+
+- [x] **MongoDB Atlas Database Setup**:
+  - Successfully created a MongoDB Atlas database to store user credentials, rooms, and tasks.
+
+- [x] **Room(User) Registration**:
+  - Implemented backend functionality to create a new room (user registration) with a unique room number and password.
+  - Validated inputs to ensure room numbers are unique, preventing duplicate entries.
+  - Room details (room number, password, and tasks) are securely stored in MongoDB.
+
+- [x] **Existing User Login**:
+  - Enabled existing users to log in using their room number and password.
+  - Validated login credentials against the database, ensuring secure authentication.
+  - Restricted actions (e.g., creating tasks) for users who are not logged in.
+
+- [x] **Data Storage and Association**:
+  - Stored room-specific tasks in MongoDB under the corresponding room document.
+  - Implemented endpoints to fetch, create, and update tasks for a specific room.
+
+- [x] **Frontend Integration**:
+  - Built the "Create Room" and "Login" pages using React.
+  - Connected the frontend with backend API endpoints using `fetch`.
+  - Displayed success or error messages for user actions such as creating a room or logging in.
+
+- [x] **Functionality Restrictions**:
+  - Prevented unauthorized users from accessing or modifying tasks by enforcing restrictions on the backend.
+  - Users must be logged in to create or manage tasks in their room.
+
+- [x] **Error Handling**:
+  - Included robust error handling in both frontend and backend:
+    - Validations for missing or incorrect inputs.
+    - Clear feedback messages for actions like duplicate room creation or incorrect login credentials.
+
+This deliverable successfully integrates MongoDB for data storage and implements a functional login system to manage user authentication and task sharing securely.
