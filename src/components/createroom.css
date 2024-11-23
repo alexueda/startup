@@ -110,3 +110,14 @@ body {
 .createroom-footer a:hover {
   text-decoration: none;
 }
+
+.createroom-message.success {
+  color: green;
+  font-weight: bold;
+}
+
+.createroom-message.error {
+  color: red;
+  font-weight: bold;
+}
+
