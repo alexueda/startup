@@ -1,29 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './websocket.css';
 
-function WebSocket() {
+function WebSocketPage() {
+  const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [logMessages, setLogMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [personInput, setPersonInput] = useState('');
 
+  useEffect(() => {
+    // Connect to WebSocket server
+    const ws = new WebSocket('ws://localhost:4000');
+    setSocket(ws);
+
+    // Handle incoming messages
+    ws.onmessage = (event) => {
+      const data = event.data;
+      setMessages((prev) => [...prev, { person: 'Server', text: data }]);
+      setLogMessages((prev) => [...prev, `Server: ${data}`]);
+    };
+
+    // Handle WebSocket errors
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    // Handle WebSocket close
+    ws.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    // Cleanup on component unmount
+    return () => {
+      ws.close();
+    };
+  }, []);
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     if (!messageInput.trim() || !personInput.trim()) {
-      alert("Both name and message are required.");
+      alert('Both name and message are required.');
       return;
     }
 
-    const currentTime = new Date();
-    const timestamp = `${currentTime.toLocaleDateString()} ${currentTime.toLocaleTimeString()}`;
+    const message = `${personInput}: ${messageInput}`;
 
-    const newMessage = { person: personInput, text: messageInput };
-    const newLogMessage = `[${timestamp}] ${personInput} sent a message: "${messageInput}".`;
-
-    setMessages([...messages, newMessage]);
-    setLogMessages([...logMessages, newLogMessage]);
+    // Send message to WebSocket server
+    if (socket) {
+      socket.send(message);
+      setMessages((prev) => [...prev, { person: personInput, text: messageInput }]);
+      setLogMessages((prev) => [
+        ...prev,
+        `You (${personInput}) sent a message: "${messageInput}".`,
+      ]);
+    }
 
     setMessageInput('');
     setPersonInput('');
@@ -92,8 +124,12 @@ function WebSocket() {
 
       <footer className="websocket-footer">
         <p>
-          Connect with us on GitHub:{" "}
-          <a href="https://github.com/alexueda/startup.git" target="_blank" rel="noopener noreferrer">
+          Connect with us on GitHub:{' '}
+          <a
+            href="https://github.com/alexueda/startup.git"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
           </a>
         </p>
@@ -102,4 +138,4 @@ function WebSocket() {
   );
 }
 
-export default WebSocket;
+export default WebSocketPage;

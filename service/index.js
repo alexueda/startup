@@ -10,6 +10,37 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 
+// Set up WebSocket server
+const server = app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
+
+const wss = new WebSocketServer({ server });
+
+// WebSocket connections
+wss.on('connection', (ws) => {
+  console.log('WebSocket client connected');
+
+  // Handle incoming messages
+  ws.on('message', (message) => {
+    console.log('Received:', message);
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(message);
+      }
+    });
+  });
+
+  // Handle disconnections
+  ws.on('close', () => {
+    console.log('WebSocket client disconnected');
+  });
+
+  // Send a welcome message to the client
+  ws.send('Welcome to the WebSocket server!');
+});
+
+
 apiRouter.post('/room/create', async (req, res) => {
   const { roomNumber, password } = req.body;
 
