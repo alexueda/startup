@@ -2,31 +2,52 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './websocket.css';
 
-function newWebSocket() {
+function NewWebSocket() {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [personInput, setPersonInput] = useState('');
   const [socket, setSocket] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:4000');
+    const connectWebSocket = () => {
+      const ws = new WebSocket('ws://localhost:4000');
 
-    setSocket(ws);
+      ws.onopen = () => {
+        console.log('WebSocket connection established');
+        setSocket(ws);
+        setIsConnected(true);
+      };
 
-    ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      setMessages((prev) => [...prev, msg]);
+      ws.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          setMessages((prev) => [...prev, msg]);
+        } catch (error) {
+          console.error('Error parsing WebSocket message:', error);
+        }
+      };
+
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+
+      ws.onclose = () => {
+        console.warn('WebSocket connection closed. Reconnecting in 5 seconds...');
+        setIsConnected(false);
+
+        // Throttle reconnection attempts
+        setTimeout(() => connectWebSocket(), 5000);
+      };
+
+      return ws;
     };
 
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
+    const ws = connectWebSocket();
 
-    ws.onclose = () => {
-      console.warn('WebSocket connection closed');
+    return () => {
+      ws.close();
     };
-
-    return () => ws.close();
   }, []);
 
   const handleFormSubmit = (event) => {
@@ -66,6 +87,7 @@ function newWebSocket() {
       <main className="websocket-main">
         <section className="messaging">
           <h2>Send a Message</h2>
+          {!isConnected && <p>Connecting to WebSocket...</p>}
           {messages.length === 0 ? (
             <p>No messages available.</p>
           ) : (
@@ -99,6 +121,4 @@ function newWebSocket() {
   );
 }
 
-export default newWebSocket;
-
-
+export default NewWebSocket;
