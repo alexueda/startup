@@ -1,5 +1,7 @@
 import express from 'express';
 import { usersCollection } from './database.js';
+import { peerProxy } from './peerProxy.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -10,6 +12,7 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 
+// API endpoint to create a room
 apiRouter.post('/room/create', async (req, res) => {
   const { roomNumber, password } = req.body;
 
@@ -31,6 +34,7 @@ apiRouter.post('/room/create', async (req, res) => {
   }
 });
 
+// API endpoint to log in to a room
 apiRouter.post('/room/login', async (req, res) => {
   const { roomNumber, password } = req.body;
 
@@ -55,6 +59,7 @@ apiRouter.post('/room/login', async (req, res) => {
   }
 });
 
+// API endpoint to get tasks in a room
 apiRouter.get('/room/:roomNumber/tasks', async (req, res) => {
   const { roomNumber } = req.params;
 
@@ -71,6 +76,7 @@ apiRouter.get('/room/:roomNumber/tasks', async (req, res) => {
   }
 });
 
+// API endpoint to add a task to a room
 apiRouter.post('/room/:roomNumber/tasks', async (req, res) => {
   const { roomNumber } = req.params;
   const { content, person, date } = req.body;
@@ -80,12 +86,8 @@ apiRouter.post('/room/:roomNumber/tasks', async (req, res) => {
   }
 
   try {
-    const room = await usersCollection().findOne({ roomNumber });
-    if (!room) {
-      return res.status(404).send({ msg: 'Room not found.' });
-    }
+    const newTask = { id: uuidv4(), content, person, date, complete: false };
 
-    const newTask = { content, person, date, complete: false };
     await usersCollection().updateOne(
       { roomNumber },
       { $push: { tasks: newTask } }
@@ -99,10 +101,40 @@ apiRouter.post('/room/:roomNumber/tasks', async (req, res) => {
   }
 });
 
+// API endpoint to delete a specific task from a room
+apiRouter.delete('/room/:roomNumber/tasks/:taskId', async (req, res) => {
+  const { roomNumber, taskId } = req.params;
+
+  try {
+    const room = await usersCollection().findOne({ roomNumber });
+    if (!room) {
+      return res.status(404).send({ msg: 'Room not found.' });
+    }
+
+    // Filter out the task with the given ID
+    const updatedTasks = room.tasks.filter((task) => task.id !== taskId);
+
+    // Update the room's tasks
+    await usersCollection().updateOne(
+      { roomNumber },
+      { $set: { tasks: updatedTasks } }
+    );
+
+    res.status(200).send({ tasks: updatedTasks }); // Send the updated task list
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    res.status(500).send({ msg: 'Internal server error.' });
+  }
+});
+
+// Catch-all handler for undefined routes
 app.use((req, res) => {
   res.status(404).send({ msg: 'Endpoint not found.' });
 });
 
-app.listen(port, () => {
+// Start the HTTP server and attach the WebSocket server
+const httpServer = app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+peerProxy(httpServer);

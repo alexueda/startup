@@ -73,11 +73,43 @@ function Sharenote() {
     }
   };
 
-  const handleDeleteTask = (taskIndex) => {
+  const handleDeleteTask = async (taskId) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
-      const updatedTasks = tasks.filter((_, index) => index !== taskIndex);
+      try {
+        const response = await fetch(`/api/room/${roomNumber}/tasks/${taskId}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setTasks(data.tasks); // Update tasks list after deletion
+          setMessage("Task deleted successfully!");
+        } else {
+          const data = await response.json();
+          setMessage(data.msg || "Failed to delete task.");
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+        setMessage("Error deleting task.");
+      }
+    }
+  };
+
+  const handleToggleComplete = async (taskId) => {
+    const updatedTask = tasks.find((task) => task.id === taskId);
+    if (!updatedTask) return;
+
+    try {
+      const updatedTasks = tasks.map((task) =>
+        task.id === taskId
+          ? { ...task, complete: !task.complete }
+          : task
+      );
       setTasks(updatedTasks);
-      alert("Task deleted successfully!");
+      setMessage("Task status updated successfully!");
+    } catch (error) {
+      console.error("Error updating task:", error);
+      setMessage("Error updating task status.");
     }
   };
 
@@ -106,26 +138,22 @@ function Sharenote() {
             <span>Date</span>
             <span>Actions</span>
           </div>
-          {tasks.map((task, index) => (
+          {tasks.map((task) => (
             <div
-              key={index}
+              key={task.id}
               className={`task-item ${task.complete ? "complete" : "incomplete"}`}
             >
               <input
                 type="checkbox"
                 checked={task.complete}
-                onChange={() => {
-                  const updatedTasks = [...tasks];
-                  updatedTasks[index].complete = !updatedTasks[index].complete;
-                  setTasks(updatedTasks);
-                }}
+                onChange={() => handleToggleComplete(task.id)}
               />
               <span className="task-content">{task.content}</span>
               <span className="task-person">{task.person}</span>
               <span className="task-date">{task.date}</span>
               <button
                 className="delete-task-button"
-                onClick={() => handleDeleteTask(index)}
+                onClick={() => handleDeleteTask(task.id)}
               >
                 Delete
               </button>
