@@ -1,7 +1,5 @@
 import express from 'express';
 import { usersCollection } from './database.js';
-import { peerProxy } from './peerProxy.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -86,8 +84,12 @@ apiRouter.post('/room/:roomNumber/tasks', async (req, res) => {
   }
 
   try {
-    const newTask = { id: uuidv4(), content, person, date, complete: false };
+    const room = await usersCollection().findOne({ roomNumber });
+    if (!room) {
+      return res.status(404).send({ msg: 'Room not found.' });
+    }
 
+    const newTask = { id: new Date().getTime().toString(), content, person, date, complete: false };
     await usersCollection().updateOne(
       { roomNumber },
       { $push: { tasks: newTask } }
@@ -105,22 +107,28 @@ apiRouter.post('/room/:roomNumber/tasks', async (req, res) => {
 apiRouter.delete('/room/:roomNumber/tasks/:taskId', async (req, res) => {
   const { roomNumber, taskId } = req.params;
 
+  if (!roomNumber || !taskId) {
+    return res.status(400).send({ msg: 'Room number and task ID are required.' });
+  }
+
   try {
     const room = await usersCollection().findOne({ roomNumber });
     if (!room) {
       return res.status(404).send({ msg: 'Room not found.' });
     }
 
-    // Filter out the task with the given ID
     const updatedTasks = room.tasks.filter((task) => task.id !== taskId);
 
-    // Update the room's tasks
-    await usersCollection().updateOne(
+    const result = await usersCollection().updateOne(
       { roomNumber },
       { $set: { tasks: updatedTasks } }
     );
 
-    res.status(200).send({ tasks: updatedTasks }); // Send the updated task list
+    if (result.modifiedCount === 0) {
+      return res.status(500).send({ msg: 'Failed to delete task.' });
+    }
+
+    res.status(200).send({ tasks: updatedTasks });
   } catch (error) {
     console.error('Error deleting task:', error);
     res.status(500).send({ msg: 'Internal server error.' });
@@ -132,9 +140,7 @@ app.use((req, res) => {
   res.status(404).send({ msg: 'Endpoint not found.' });
 });
 
-// Start the HTTP server and attach the WebSocket server
-const httpServer = app.listen(port, () => {
+// Start the HTTP server
+app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-peerProxy(httpServer);
