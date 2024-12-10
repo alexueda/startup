@@ -1,5 +1,6 @@
 import express from 'express';
 import { usersCollection } from './database.js';
+import { peerProxy } from './peerProxy.js';
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -140,7 +141,13 @@ app.use((req, res) => {
   res.status(404).send({ msg: 'Endpoint not found.' });
 });
 
-// Start the HTTP server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  // // Start the HTTP server
+  // app.listen(port, () => {
+  //   console.log(`Server running on http://localhost:${port}`);
+  // });
+
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
