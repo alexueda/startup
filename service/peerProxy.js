@@ -4,11 +4,16 @@ import { WebSocketServer } from 'ws';
 function peerProxy(httpServer) {
   const wss = new WebSocketServer({ noServer: true });
 
-  // Handle HTTP server upgrade to WebSocket
+  // Upgrade HTTP requests to WebSocket only if they match the /websocket path
   httpServer.on('upgrade', (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, (ws) => {
-      wss.emit('connection', ws, request);
-    });
+    const { url } = request;
+    if (url === '/websocket') {
+      wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit('connection', ws, request);
+      });
+    } else {
+      socket.destroy(); // Reject other upgrade requests
+    }
   });
 
   const connections = [];
@@ -18,7 +23,6 @@ function peerProxy(httpServer) {
     connections.push(connection);
     console.log(`New WebSocket connection established: ${connection.id}`);
 
-    // Handle incoming messages
     ws.on('message', (message) => {
       try {
         const parsedMessage = JSON.parse(message);
@@ -28,7 +32,7 @@ function peerProxy(httpServer) {
         connections.forEach((conn) => {
           if (conn.id !== connection.id && conn.ws.readyState === conn.ws.OPEN) {
             conn.ws.send(JSON.stringify(parsedMessage));
-            console.log(`Broadcasting message to ${conn.id}`);
+            console.log(`Broadcasted message to ${conn.id}`);
           }
         });
       } catch (error) {
@@ -36,19 +40,16 @@ function peerProxy(httpServer) {
       }
     });
 
-    // Handle connection close
     ws.on('close', () => {
       console.log(`Connection closed: ${connection.id}`);
       const index = connections.findIndex((conn) => conn.id === connection.id);
       if (index >= 0) connections.splice(index, 1);
     });
 
-    // Handle WebSocket errors
     ws.on('error', (error) => {
       console.error(`WebSocket error on connection ${connection.id}:`, error);
     });
 
-    // Handle pong (heartbeat)
     ws.on('pong', () => {
       connection.alive = true;
     });

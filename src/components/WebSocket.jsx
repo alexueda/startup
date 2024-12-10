@@ -11,7 +11,11 @@ function NewWebSocket() {
 
   useEffect(() => {
     const connectWebSocket = () => {
-      const ws = new WebSocket('ws://localhost:4000');
+      const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+      const host = window.location.host;
+      const wsUrl = `${protocol}://${host}/websocket`; // Updated WebSocket path
+
+      const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
         console.log('WebSocket connection established');
@@ -22,6 +26,7 @@ function NewWebSocket() {
       ws.onmessage = (event) => {
         try {
           const msg = JSON.parse(event.data);
+          console.log('Message received:', msg);
           setMessages((prev) => [...prev, msg]);
         } catch (error) {
           console.error('Error parsing WebSocket message:', error);
@@ -36,7 +41,7 @@ function NewWebSocket() {
         console.warn('WebSocket connection closed. Reconnecting in 5 seconds...');
         setIsConnected(false);
 
-        // Throttle reconnection attempts
+        // Retry connection after a delay
         setTimeout(() => connectWebSocket(), 5000);
       };
 
@@ -46,7 +51,9 @@ function NewWebSocket() {
     const ws = connectWebSocket();
 
     return () => {
-      ws.close();
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
     };
   }, []);
 
@@ -61,6 +68,7 @@ function NewWebSocket() {
     const newMessage = { person: personInput, text: messageInput };
 
     if (socket && socket.readyState === WebSocket.OPEN) {
+      console.log('Sending message:', newMessage);
       socket.send(JSON.stringify(newMessage));
     } else {
       alert('WebSocket connection is not open. Please try again later.');
