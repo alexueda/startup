@@ -107,7 +107,7 @@ For this deliverable, I used JavaScript and React to ensure the application func
   - Third-Party Services
 - [x] **React Hooks** - Used `useState` and `useEffect` hooks to manage component state and simulate real-time updates within components. Additional functionality was modularized using custom hooks, like `useTaskActions` in `Settings` for handling user interactions with tasks.
 
-### Service deliverable
+## Service deliverable
 
 ➡️ The following summarizes the **Service deliverable**.
 
@@ -136,7 +136,7 @@ For this deliverable, I developed both backend services and frontend pages to en
   - Created a clean UI for sending messages and viewing activity logs.
   - Messages include timestamps for better tracking.
 
-### DB/Login Deliverable
+## DB/Login Deliverable
 
 ➡️ The following summarizes the **DB/Login deliverable**.
 
@@ -176,7 +176,7 @@ For this deliverable, I developed a backend authentication system and integrated
 This deliverable successfully integrates MongoDB for data storage and implements a functional login system to manage user authentication and task sharing securely.
 
 
-### WebSocket Deliverable
+## WebSocket Deliverable
 ➡️ The following summarizes the **WebSocket deliverable**.
 
 For this deliverable, I implemented a real-time messaging system using WebSockets, integrating both backend and frontend to enable instant communication between multiple clients.
