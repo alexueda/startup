@@ -59,23 +59,25 @@ function NewWebSocket() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
+  
     if (!messageInput.trim() || !personInput.trim()) {
       alert('Both name and message are required.');
       return;
     }
-
+  
     const newMessage = { person: personInput, text: messageInput };
-
+  
     if (socket && socket.readyState === WebSocket.OPEN) {
       console.log('Sending message:', newMessage);
       socket.send(JSON.stringify(newMessage));
+  
+      // Update local state immediately to show the sent message
+      setMessages((prev) => [...prev, newMessage]);
     } else {
       alert('WebSocket connection is not open. Please try again later.');
     }
-
+  
     setMessageInput('');
-    setPersonInput('');
   };
 
   return (
