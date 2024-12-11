@@ -181,38 +181,32 @@ This deliverable successfully integrates MongoDB for data storage and implements
 
 For this deliverable, I implemented a real-time messaging system using WebSockets, integrating both backend and frontend to enable instant communication between multiple clients.
 
-- [x]WebSocket Backend Setup:
+- [x] **WebSocket Backend Setup**:
+  - Implemented a WebSocket server using the ws library in Node.js.
+  - Configured the server to handle connections on the /websocket endpoint.
+  - Upgraded HTTP requests to WebSocket connections and securely managed the lifecycle of connections.
+  - Developed functionality to broadcast messages to all connected clients, ensuring real-time updates.
 
-- Implemented a WebSocket server using the ws library in Node.js.
-- Configured the server to handle connections on the /websocket endpoint.
-- Upgraded HTTP requests to WebSocket connections and securely managed the lifecycle of connections.
-- Developed functionality to broadcast messages to all connected clients, ensuring real-time updates.
+- [x] **Message Broadcasting**:
+  - Ensured messages sent by one client are immediately broadcasted to all other connected clients.
+  - Added logic to differentiate between the sender and other recipients, preventing duplicates or missed messages.
 
-- [x]Message Broadcasting:
+- [x] **Frontend Integration**:
+  - Built a WebSocket client using the browser's WebSocket API.
+  - Integrated the WebSocket client into a React application, dynamically connecting it to the backend.
+  - Implemented functionality to send messages through WebSocket from the frontend.
+  - Handled received messages in real-time and updated the UI accordingly.
 
-- Ensured messages sent by one client are immediately broadcasted to all other connected clients.
-- Added logic to differentiate between the sender and other recipients, preventing duplicates or missed messages.
+- [x] **Immediate Local Updates**:
+  - Optimized the frontend to display sent messages immediately in the sender’s UI without waiting for server confirmation.
+  - Ensured seamless synchronization between local UI updates and server broadcasts.
 
-- [x]Frontend Integration:
+- [x] **Reconnection Logic**:
+  - Added robust reconnection logic to handle unexpected WebSocket disconnections.
+  - Automatically attempted reconnections with a delay to maintain connection reliability.
 
-- Built a WebSocket client using the browser's WebSocket API.
-- Integrated the WebSocket client into a React application, dynamically connecting it to the backend.
-- Implemented functionality to send messages through WebSocket from the frontend.
-- Handled received messages in real-time and updated the UI accordingly.
-
-- [x]Immediate Local Updates:
-
-- Optimized the frontend to display sent messages immediately in the sender’s UI without waiting for server confirmation.
-- Ensured seamless synchronization between local UI updates and server broadcasts.
-
-- [x]Reconnection Logic:
-
-- Added robust reconnection logic to handle unexpected WebSocket disconnections.
-- Automatically attempted reconnections with a delay to maintain connection reliability.
-
-- [x]Error Handling:
-
-- Backend: Managed invalid or malformed messages and handled inactive connections securely.
-- Frontend: Displayed user-friendly error messages for connection failures or message sending issues.
+- [x] **Error Handling**:
+  - Backend: Managed invalid or malformed messages and handled inactive connections securely.
+  - Frontend: Displayed user-friendly error messages for connection failures or message sending issues.
 
 This deliverable successfully integrates WebSockets for real-time communication and ensures a robust, error-handled, and user-friendly experience for messaging across multiple clients.
